@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+
+{% block title %}Student Details{% endblock %}
+
+{% block body_block %}
+    <script>
+    $(document).ready(function () {
+
+         $.ajax({
+        method:'GET',
+        url:'http://127.0.0.1:8000/register_student/',
+        data:{
+             csrfmiddlewaretoken:$('Input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function (data) {
+            alert("Done");
+            console.log(data);
+
+           for(i in data)
+           {
+
+               // console.log(data[i].name);
+                $('#table_body').append("<tr><td>"+data[i].roll+"</td><td>"+data[i].name+"</td><td>"+data[i].email+"</td><td>"+data[i].contact+"</td><td><a href='#' class='btn btn-danger' >Delete</a></td><td><a href='#' class='btn btn-success' >Update</a></td></tr>");
+           }
+
+
+           // console.log(data);
+        },
+        error: function (data) {
+
+            alert("Error....\n");
+            console.log(data);
+        }
+
+    });
+
+
+
+    });
+
+
+    </script>
+
+<br>
+    <p id="d"></p>
+<div id="record">
+    <h3 class="text-center"><b>Student Details</b></h3>
+<table class="table table-striped">
+    <thead>
+    <tr><th>Roll No</th><th>Name</th><th>Email_Id</th><th>Contact</th><th>Delete</th><th>Update</th></tr>
+    </thead>
+    <tbody id="table_body">
+
+    </tbody>
+</table>
+
+</div>
+
+
+{% endblock %}
