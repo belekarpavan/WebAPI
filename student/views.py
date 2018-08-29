@@ -26,28 +26,36 @@ class register(APIView):
 
 
     def get(self,request,pk=0):
-        stud=student.objects.all();
-        ser=studentSerializer(stud,many=True);
+        if pk==0:
+            stud=student.objects.all()
+            ser = studentSerializer(stud, many=True)
+        else:
+            stud=student.objects.get(pk=pk)
+            ser = studentSerializer(stud)
+
+
         return Response(ser.data)
 
     def post(self,request,pk=0):
-        #return JsonResponse({"message": 'Form submited succesfully..'}, status=200)
-        #stud=student.objects.all()
         ser=studentSerializer(data=request.data)
 
         if ser.is_valid():
             ser.save()
-            return JsonResponse({"message":"Data Save Succesfully","data":request.data})
+            return JsonResponse({"message":"Data Save Succesfully"})
         return JsonResponse({"message": "Data Not Save "})
 
 
     def delete(self,request,pk):
-        stud=student.objects.all(pk=pk)
-        ser=studentSerializer(stud,data=request.data)
-        if ser.is_valid():
-            stud.delete()
-            return JsonResponse({"message": "Record Deleted Succesfully", "data": request.data})
-        return JsonResponse({"message": "Failed To Delete", "data": request.data})
+
+        stud = student.objects.get(pk=pk)
+        ser = studentSerializer(stud)
+        #stud.delete()
+        return JsonResponse({'message':'Record Deleted Succesfully'})
 
     def put(self,request,pk):
-        pass
+        stud = student.objects.get(pk=pk)
+        ser = studentSerializer(stud,data=request.data)
+        if ser.is_valid():
+            ser.save()
+            return JsonResponse({'message':'Record Update Succesfully'})
+        return JsonResponse({'message': 'Some Problem is Occure'})
