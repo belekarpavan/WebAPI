@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student',
+    'SchoolApp',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'testAjax.wsgi.application'
 DATABASES = {
    'default': {
       'ENGINE': 'django.db.backends.mysql',
-      'NAME': 'ajax',
+      'NAME': 'school',
       'USER': 'root',
       'PASSWORD': 'root',
       'HOST': 'localhost',

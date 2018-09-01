@@ -29,11 +29,11 @@
     <div class="card" style="width: 50%;margin-left: 26%;" id="card">
      <div class="card-header"><h3>Registration Form</h3></div>
       <div class="card-body">
-         <form action="#" method="post" id="frm" onsubmit="return formvalidate()">
+         <form action="#" method="post" id="frm" >
              {% csrf_token %}
          <div class="form-group">
              <label>Name :</label>
-             <input type="text" id="name" class="form-control" pattern="[A-Za-z]+" placeholder="Your Good Name" required>
+             <input type="text" id="name" onkeyup="validname()" class="form-control" pattern="[A-Za-z]+" placeholder="Your Good Name" required>
 
          </div>
              <div class="form-group">
@@ -58,98 +58,6 @@
 
 
     </div>
-
-<script>
-function validmobile() {
-
-    var num=document.getElementById('contact');
-
-    if(isNaN(num.value))
-    {
-        document.getElementById('errmobile').innerText="Please Enter digit Only ";
-        num.value='';
-        return false;
-    }
-    else
-    {
-        document.getElementById('errmobile').innerText="";
-        return true
-    }
-
-}
-
-
-function validateemail(textbox)
-{
-var x=document.getElementById('email').value;
-var atposition=x.indexOf("@");
-var dotposition=x.lastIndexOf(".");
-if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
-  document.getElementById('erremail').innerText="Please enter a valid e-mail address ";
-  //alert("plz enter valid mail");
-    var e=document.getElementById('email');
-    //textbox.setCustomValidity('please enter a valid email address ppp');
-    return false;
-  }
-  else
-{
-     document.getElementById('erremail').innerHTML="";
-     //textbox.setCustomValidity('');
-     return true;
-}
-}
-
-function formvalidate() {
-
-    if(validmobile() && validateemail())
-        return true;
-    else
-        return false;
-
-}
-
-
-$(document).on('submit','#frm',function (e) {
-    e.preventDefault();
-    $('#loading').prop('hidden', false);
-    $('#card').hide();
-
-    $.ajax({
-        method:'post',
-        url:'http://127.0.0.1:8000/register_student/',
-        data:{
-            name: $("#name").val(),
-            email: $("#email").val(),
-            contact: $("#contact").val(),
-             csrfmiddlewaretoken:$('Input[name=csrfmiddlewaretoken]').val(),
-        },
-        success: function (data) {
-            alert("Done");
-             $('#loading').hide();
-              $('#msg').text("Form Submitted Succesfully...");
-             $('#card').fadeIn('slow');
-            console.log(data);
-        },
-        error: function (data) {
-
-            alert("Error....\n"+data);
-            $('#loading').hide();
-
-            $('#msg').text("Failed To Submit!");
-
-             $('#card').fadeIn('slow');
-            console.log(data);
-        }
-
-    });
-    $('#frm')[0].reset();
-    setTimeout(function () {$('#msg').hide();
-    },5000);
-
-})
-
-</script>
-
 
 {% endblock %}
 

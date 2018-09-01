@@ -49,7 +49,7 @@ class register(APIView):
 
         stud = student.objects.get(pk=pk)
         ser = studentSerializer(stud)
-        #stud.delete()
+        stud.delete()
         return JsonResponse({'message':'Record Deleted Succesfully'})
 
     def put(self,request,pk):
