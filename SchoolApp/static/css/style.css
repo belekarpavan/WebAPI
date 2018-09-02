@@ -1,5 +1,16 @@
-.icon
-{
-    color: brown;
-    size: 35px;
-}
+
+    body
+	{
+		background-color: white;
+	}
+    .icon
+	{
+		font-size: 45px;
+		color: red;
+
+	}
+
+    .hide
+    {
+        visibility: hidden;
+    }

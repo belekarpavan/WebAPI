@@ -1,6 +1,6 @@
-function validmobile() {
+function validmobile(num) {
 
-    var num=document.getElementById('contact');
+
     var val=num.value;
     val=val.replace(/\D/g,'');
     num.value=val;
@@ -22,13 +22,50 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
      return true;
 }
 }
-function validname() {
-    var name=document.getElementById('name');
+function validname(name) {
+
     var val=name.value;
      //alert(val.replace(/\d+/g,''))
     val=val.replace(/\d+/g,'');
     name.value=val;
 }
+
+function validpassword() {
+
+    var strength = document.getElementById('strength');
+
+    var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+    var mediumRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+    var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+    var pwd = document.getElementById("password");
+
+
+    if (pwd.value.length==0) {
+        strength.innerHTML = 'Type Password';
+    }
+     else if (strongRegex.test(pwd.value)) {
+        strength.innerHTML = "<span style='color:green'>Strong!</span>";
+    }
+    else if (mediumRegex.test(pwd.value)) {
+        strength.innerHTML = "<span style='color:orange'>Medium!</span>";
+    }
+     else if (false == enoughRegex.test(pwd.value)) {
+        strength.innerHTML = "More Characters";
+    }
+
+    else {
+        strength.innerHTML = "<span style='color:red'>Weak!</span>";
+    }
+}
+
+function getage()
+  {
+
+    var udate=document.getElementById('dob').value.substr(0,4);
+    var cdate=new Date().getFullYear();
+    document.getElementById('age').value = cdate-udate;
+
+  }
 
 
 $(document).on('submit','#frm',function (e) {

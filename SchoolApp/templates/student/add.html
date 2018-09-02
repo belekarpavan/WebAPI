@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Student{% endblock %}
+
+{% block body_block %}
+
+<div class="container" >
+	<div style="width: 80%; margin-left: 10%;">
+<br>
+	<div class="card " >
+
+
+		<div class="card-header "  ><i class="fa fa-address-card-o icon " ></i>&nbsp;&nbsp;&nbsp; &nbsp;
+			<b style="font-size:18px; ">Registration Form</b></div>
+		
+		<div class="card-block" style="margin-left: 20px;margin-right: 20px;  ">
+			<form action="#" method="post">
+                {% csrf_token %}
+                <br>
+				<div class="row">
+					<div class="col-sm-4"><label>First Name :</label></div>
+                    <div class="col-sm-4"><label>Middle Name :</label></div>
+                    <div class="col-sm-4"><label>Last Name :</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"> <input type="text" onkeyup="validname(this)" class="form-control" id="sfname"placeholder="Your Name"  required></div>
+					<div class="col-sm-4"><input type="text" id="smname" onkeyup="validname(this)" class="form-control" placeholder="Middle Name"  required></div>
+					<div class="col-sm-4"><input type="text" id="slname" onkeyup="validname(this)" class="form-control" placeholder="Last Name"  required></div>
+				</div>
+                 <input type="submit" id="s1" id="s"  value="parent" style="visibility: hidden"/>
+				<br>
+            </form>
+            <form action="#" method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-sm-4"><label>Parent First Name :</label></div>
+                    <div class="col-sm-4"><label>Parent Middle Name :</label></div>
+                    <div class="col-sm-4"><label>Parent Last Name :</label></div>
+                </div>
+				<div class="row">
+					<div class="col-sm-4">
+                    <select id="ffname"  class="form-control" >
+
+                    </select>
+                    </div>
+
+					<div class="col-sm-4"><select id="fmname"  class="form-control">
+
+                    </select></div>
+
+					<div class="col-sm-4"><select id="flname"  class="form-control">
+
+                    </select></div>
+				</div>
+
+
+				<br>
+
+				<div class="row">
+					<div class="col-sm-7"><div class="form-group"><label>Address :</label><textarea rows="4" id="addr" class="form-control" placeholder="Address" required></textarea></div></div>
+					<div class="col-sm-1"></div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Select Deparment :</label>
+                                    <select id="dept" class="form-control">
+
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Select Course :</label>
+                                    <select id="course" class="form-control">
+
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+						
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>State :</label>
+							<input type="text" id="state" onkeyup="validname(this)" class="form-control" placeholder="State Name" required>
+						</div> 
+					</div>
+
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>City :</label>
+							<input type="text" id="city" class="form-control" onkeyup="validname(this)" placeholder="City  Name" required>
+						</div> 
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label>Pin No :</label>
+							<input type="text" id="pin"  class="form-control" maxlength="6" minlength="6" placeholder="Pin Code" pattern="[0-9]+" onkeyup="validmobile(this)" required>
+						</div> 
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label>Gender :</label>&nbsp;
+							<label><input type="radio" id="gen" value="male" r
+								>   &nbsp;Male</label>  &nbsp;&nbsp;&nbsp;
+							<label><input type="radio" id="gen" value="female">&nbsp; Female  </label> &nbsp;&nbsp;&nbsp;
+							<label><input type="radio" id="gen" value="other">&nbsp;Other   </label>
+						</div>						
+					</div>
+					<div class="col-sm-2"></div>
+					<div class="col-sm-5"></div>					
+				</div>
+
+				<div class="row">
+
+					<div class="col-sm-5">
+						<div class="form-group">
+								<label>Date Of Birth :</label>
+								<input type="date" id="dob"  onchange="getage()" class="form-control" required>
+							</div>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<div class="form-group">
+								<label>Age :</label>
+								<input type="text" id="age"  class="form-control" disabled="" placeholder="Age" >
+							</div>
+					</div>
+					
+
+				</div>
+
+
+
+				<div class="row">
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label>Email Id :</label>
+							<input type="email" class="form-control" onkeyup="validateemail(this)" placeholder="Your Email Id" required>
+						</div>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label>Contact No :</label>
+							<input type="text"  id="contact" maxlength="10" minlength="10" class="form-control" placeholder="Mobile Number"  onkeyup="validmobile(this)" required>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label>Password :</label>
+							<input type="password" id="password" class="form-control" onkeyup="validpassword()" placeholder="Create Your Password" required>&nbsp;&nbsp;<span id="strength">Type Password</span><br>
+						</div>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label>Confirm Password :</label>
+							<input type="password" id="cpassword" class="form-control" onkeyup="checkpass()" placeholder="Confirm Your Password" required>
+						</div>
+					</div>
+					
+				</div>
+					
+
+				<br><br>
+
+				
+					
+						<div class="form-group text-right" style=" float: right; width: 30%; margin-right: 10%;">
+					<input type="submit" name="s"  id="s2" value="Register" onclick="checkpass()" class=" form-control btn-success ">
+
+					</div>
+					
+					
+			
+
+<br><br>
+			</form>
+
+		</div>
+
+	</div>
+	</div>
+</div>
+
+
+
+{% endblock %}

@@ -31,6 +31,62 @@ function validname() {
 }
 
 
+function age()
+  {
+    var udate=document.getElementById("dob").value.substr(0,4);
+    var cdate=new Date().getFullYear();
+    document.getElementById("age").value = cdate-udate;
+  }
+
+function checkpass()
+  {
+    var p=document.getElementById("pass");
+    var c=document.getElementById("cpass");
+    if(p.value!=c.value)
+    {
+      c.setCustomValidity("Password doesn't Match!!!!");
+    }
+    else
+    {
+      c.setCustomValidity("");
+    }
+  }
+
+
+
+function validpassword() {
+  
+    var strength = document.getElementById('strength');
+  
+    var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+    var mediumRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+    var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+    var pwd = document.getElementById("password");
+    
+
+    if (pwd.value.length==0) {
+        strength.innerHTML = 'Type Password';
+    }
+     else if (strongRegex.test(pwd.value)) {
+        strength.innerHTML = "<span style='color:green'>Strong!</span>";
+    } 
+    else if (mediumRegex.test(pwd.value)) {
+        strength.innerHTML = "<span style='color:orange'>Medium!</span>";
+    } 
+     else if (false == enoughRegex.test(pwd.value)) {
+        strength.innerHTML = "More Characters";
+    }    
+   
+    else {
+        strength.innerHTML = "<span style='color:red'>Weak!</span>";
+    }
+}
+
+
+
+
+
+
 $(document).on('submit','#frm',function (e) {
     e.preventDefault();
     $('#loading').prop('hidden', false);
